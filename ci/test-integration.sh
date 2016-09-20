@@ -20,7 +20,7 @@ curl_try (){
 	i="0"
 	while [[ ${i} < 200 ]]; do
 		set +o errexit
-		STATUS_CODE=${CMD}
+		STATUS_CODE="$(${CMD})"
 		set -o errexit
 		if [[ "200" == "${STATUS_CODE}" ]]; then
 		       	break
@@ -39,7 +39,7 @@ trap cleanup EXIT
 
 CONTAINER_IP="$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${CONTAINER_ID})"
 
-public="$(curl -I -s "http://${CONTAINER_IP}/public" | grep "HTTP/1.1" | cut -d' ' -f2)"
+public='curl -I -s "http://${CONTAINER_IP}/public" | grep "HTTP/1.1" | cut -d' ' -f2)'
 curl_try ${public}
 
 USERNAME="$(date | md5sum | head -c 10)"

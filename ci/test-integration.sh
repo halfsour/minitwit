@@ -44,18 +44,18 @@ curl_try ${public}
 
 USERNAME="$(date | md5sum | head -c 10)"
 
-register_tst="$(curl -v -f -X POST --data "username=${USERNAME}&email=test@mailinator.com&password=password&password2=password" "http://${CONTAINER_IP}/register)"
+register_tst="curl -v -f -X POST --data "username=${USERNAME}&email=test@mailinator.com&password=password&password2=password" "http://${CONTAINER_IP}/register""
 curl_try ${register_tst}
 
-login_tst="$(curl -v -f -X POST -c "${COOKIE_JAR}" --data "username=${USERNAME}&password=password" "http://${CONTAINER_IP}/login")"
+login_tst="curl -v -f -X POST -c "${COOKIE_JAR}" --data "username=${USERNAME}&password=password" "http://${CONTAINER_IP}/login""
 curl_try ${login_tst}
 
 MESSAGE="$(date | md5sum | head -c 10)"
 
-msg_tst="$(curl -v -f -X POST -b "${COOKIE_JAR}" -data "text=secret-test-message" "http://${CONTAINER_IP}/message")"
+msg_tst="curl -v -f -X POST -b "${COOKIE_JAR}" -data "text=secret-test-message" "http://${CONTAINER_IP}/message""
 curl_try ${msg_tst}
 
-getmsg_tst="$(curl -v -f "http://${CONTAINER_IP}/public" | grep -s "${MESSAGE}")"
+getmsg_tst="curl -v -f "http://${CONTAINER_IP}/public" | grep -s "${MESSAGE}""
 curl_try ${getmsg_tst}
 
 echo "TEST PASSED"

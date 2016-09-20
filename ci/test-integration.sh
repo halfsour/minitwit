@@ -17,11 +17,12 @@ CONTAINER_ID="$(docker run -d "${DOCKER_IMG}")"
 
 curl_try (){
 	CMD=${1}
-	echo "CMD is: ${CMD}"
+	echo "CMD is: " ${CMD}
 	i="0"
 	while [[ ${i} < 200 ]]; do
 		set +o errexit
 		STATUS_CODE="$(${CMD})"
+		echo "STATUS_CODE is: " ${STATUS_CODE}
 		set -o errexit
 		if [[ "200" == "${STATUS_CODE}" ]]; then
 		       	break

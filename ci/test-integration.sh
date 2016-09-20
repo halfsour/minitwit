@@ -53,6 +53,16 @@ curl -v -f -X POST -b "${COOKIE_JAR}" \
   --data "text=secret-test-message" \
   "http://${CONTAINER_IP}/message"
 
-curl -vf "http://${CONTAINER_IP}/public" | grep -s "${MESSAGE}"
+i="0"
+while [[ ${i} < 100 ]]; do
+	set +o errexit
+	STATUS_CODE="$(curl -v -f "http://${CONTAINER_IP}/public" | grep -s "${MESSAGE}")"
+	set -o errexit
+	if [[ "200" == "${STATUS_CODE}" ]];then
+		break
+	fi
+	i=[$i+1]
+	sleep 1
+done
 
 echo "TEST PASSED"

@@ -1,0 +1,9 @@
+{
+  "service": {
+    "name": "jenkins"
+  },
+  "storage": {
+    "host-volume": "/mnt/jenkins_data",
+    "pinned-hostname": "10.0.0.51"
+  }
+}

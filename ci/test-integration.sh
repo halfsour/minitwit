@@ -35,8 +35,6 @@ while [[ ${i} < 200 ]]; do
   sleep 2
 done
 
-STATUS_CODE="$(curl -I -s "http://${CONTAINER_IP}/public" | grep "HTTP/1.1" | cut -d' ' -f2)"
-
 USERNAME="$(date | md5sum | head -c 10)"
 
 curl -v -f -X POST \

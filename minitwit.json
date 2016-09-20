@@ -23,7 +23,7 @@
           "hostPort": 0,
           "containerPort": 80,
           "protocol": "tcp",
-	  "servicePort":80,
+	  "servicePort":8080,
           "name": "http-api"
         }
       ],

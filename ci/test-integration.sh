@@ -54,11 +54,11 @@ curl -v -f -X POST -b "${COOKIE_JAR}" \
   "http://${CONTAINER_IP}/message"
 
 i="0"
+set +o errexit
 while [[ ${i} < 100 ]]; do
-	set +o errexit
 	STATUS_CODE="$(curl -v -f "http://${CONTAINER_IP}/public" | grep -s "${MESSAGE}")"
-	set -o errexit
 	if [[ "200" == "${STATUS_CODE}" ]];then
+		set -o errexit
 		break
 	fi
 	i=[$i+1]

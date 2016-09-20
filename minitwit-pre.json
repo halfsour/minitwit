@@ -1,0 +1,36 @@
+{
+  "id": "/whatatwit",
+  "instances": 1,
+  "cpus": 1,
+  "mem": 512,
+  "container": {
+    "docker": {
+      "image": "karlkfi/minitwit",
+      "forcePullImage": false,
+      "privileged": false,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80,
+          "protocol": "tcp",
+          "name": "http-api"
+        }
+      ],
+      "network": "BRIDGE"
+    }
+  },
+  "acceptedResourceRoles": [
+    "slave_public"
+  ],
+  "requirePorts": true,
+  "healthChecks": [
+    {
+      "protocol": "TCP",
+      "gracePeriodSeconds": 30,
+      "intervalSeconds": 15,
+      "timeoutSeconds": 5,
+      "maxConsecutiveFailures": 2,
+      "portName": "http-api"
+    }
+  ]
+}

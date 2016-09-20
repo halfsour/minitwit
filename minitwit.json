@@ -1,0 +1,60 @@
+{
+  "id": "/whatatwit",
+  "instances": 1,
+  "env": {
+	  "SPRING_DATASOURCE_URL": "jdbc:mysql://littlefinger-mysql.marathon.mesos:3306/minitwit?autoReconnect=true&useSSL=false",
+	  "SPRING_DATASOURCE_USERNAME": "minitwit",
+	  "SPRING_DATASOURCE_PASSWORD": "minitwit",
+	  "SPRING_DATASOURCE_DRIVER-CLASS-NAME": "com.mysql.cj.jdbc.Driver",
+	  "SPRING_DATASOURCE_PLATFORM": "mysql"
+},
+"labels": {
+	"HAPROXY_GROUP":"external"
+},
+  "cpus": 1,
+  "mem": 512,
+  "container": {
+    "docker": {
+      "image": "karlkfi/minitwit",
+      "forcePullImage": false,
+      "privileged": false,
+      "portMappings": [
+        {
+          "hostPort": 0,
+          "containerPort": 80,
+          "protocol": "tcp",
+	  "servicePort":80,
+          "name": "http-api"
+        }
+      ],
+      "network": "BRIDGE"
+    }
+  },
+"upgradeStrategy": {
+    "minimumHealthCapacity": 0,
+    "maximumOverCapacity": 0
+  },
+  "acceptedResourceRoles": null,
+  "requirePorts": false,
+  "healthChecks": [
+    {
+      "protocol": "TCP",
+      "gracePeriodSeconds": 30,
+      "intervalSeconds": 15,
+      "timeoutSeconds": 5,
+      "maxConsecutiveFailures": 2,
+      "portName": "http-api"
+    }
+  ],
+  "readinessChecks": [
+    {
+      "protocol": "HTTP",
+      "path": "/",
+      "portName": "http-api",
+      "intervalSeconds": 15,
+      "timeoutSeconds": 5,
+      "httpStatusCodesForReady": [ 200, 302 ],
+      "preserveLastResponse": true
+    }
+  ]
+}

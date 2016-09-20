@@ -1,0 +1,13 @@
+{
+  "service": {
+    "name": "littlefinger-mysql"
+  },
+  "mysql": {
+    "root_password": "root",
+    "database": {
+      "name": "minitwit",
+      "username": "minitwit",
+      "password": "minitwit"
+    }
+  }
+}

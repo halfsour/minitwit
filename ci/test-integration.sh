@@ -44,8 +44,8 @@ curl_try ${public}
 
 USERNAME="$(date | md5sum | head -c 10)"
 
-register_tst="curl -v -f -X POST --data "username=${USERNAME}&email=test@mailinator.com&password=password&password2=password" "http://${CONTAINER_IP}/register""
-curl_try ${register_tst}
+reg_tst="curl -v -f -X POST --data "username=${USERNAME}&email=test@mailinator.com&password=password&password2=password" "http://${CONTAINER_IP}/register""
+curl_try ${reg_tst}
 
 login_tst="curl -v -f -X POST -c "${COOKIE_JAR}" --data "username=${USERNAME}&password=password" "http://${CONTAINER_IP}/login""
 curl_try ${login_tst}

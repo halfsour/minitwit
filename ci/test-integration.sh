@@ -16,7 +16,7 @@ COOKIE_JAR="cookies-$(date | md5sum | head -c 10).txt"
 CONTAINER_ID="$(docker run -d "${DOCKER_IMG}")"
 
 curl_try (){
-	CMD=${1}
+	CMD=$@
 	echo "CMD is: " ${CMD}
 	i="0"
 	while [[ ${i} < 200 ]]; do
@@ -42,6 +42,7 @@ trap cleanup EXIT
 CONTAINER_IP="$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${CONTAINER_ID})"
 
 public="curl -I -s \"http://${CONTAINER_IP}/public\" | grep \"HTTP/1.1\" | cut -d' ' -f2)"
+
 curl_try ${public}
 
 USERNAME="$(date | md5sum | head -c 10)"

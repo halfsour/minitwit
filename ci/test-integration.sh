@@ -17,6 +17,7 @@ CONTAINER_ID="$(docker run -d "${DOCKER_IMG}")"
 
 curl_try (){
 	CMD=${1}
+	echo "CMD is: ${CMD}"
 	i="0"
 	while [[ ${i} < 200 ]]; do
 		set +o errexit

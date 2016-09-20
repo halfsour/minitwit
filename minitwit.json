@@ -1,6 +1,6 @@
 {
   "id": "/whatatwit",
-  "instances": 1,
+  "instances": 10,
   "env": {
 	  "SPRING_DATASOURCE_URL": "jdbc:mysql://littlefinger-mysql.marathon.mesos:3306/minitwit?autoReconnect=true&useSSL=false",
 	  "SPRING_DATASOURCE_USERNAME": "minitwit",

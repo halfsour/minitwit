@@ -53,6 +53,6 @@ curl -v -f -X POST -b "${COOKIE_JAR}" \
   --data "text=secret-test-message" \
   "http://${CONTAINER_IP}/message"
 
-curl -f "http://${CONTAINER_IP}/public" | grep -s "${MESSAGE}"
+curl -vf "http://${CONTAINER_IP}/public" | grep -s "${MESSAGE}"
 
 echo "TEST PASSED"
